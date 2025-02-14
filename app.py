@@ -27,12 +27,12 @@ def read_pmsa003_i2c():
     """
     try:
         i2c = busio.I2C(board.SCL, board.SDA, frequency=100000)
-        reset_pin = None  # Change this if you've connected a GPIO to the sensor's RESET pin
+        reset_pin = None  # update if needed
         pm25 = PM25_I2C(i2c, reset_pin)
         aqdata = pm25.read()
         return aqdata
     except Exception as e:
-        return f"Error reading PMSA003: {e}"
+        return {"error": str(e)}
 
 def interpret_air_quality(aqdata):
     """
@@ -126,7 +126,7 @@ if isinstance(aqdata, dict):
 else:
     st.error(aqdata)
 
-# Add a refresh button that, when clicked, forces the app to rerun
+# Add a refresh button to force an app rerun
 if st.button("Refresh"):
     st.experimental_rerun()
 
