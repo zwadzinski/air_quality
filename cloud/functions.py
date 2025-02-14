@@ -1,14 +1,3 @@
-#import streamlit as streamlit
-import time
-import adafruit_sgp40
-import board
-import busio
-# Import the BitBangIO version for software I2C
-import adafruit_bitbangio as bitbangio
-from adafruit_pm25.i2c import PM25_I2C
-from adafruit_sgp40 import SGP40  
-import streamlit as st
-
 def interpret_air_quality(aqdata):
     """
     Interprets the air quality based on the PM2.5 concentration (µg/m³)
