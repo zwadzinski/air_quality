@@ -38,12 +38,10 @@ def read_sgp40_sw():
 
 # New function for sgp40 sensor data
 def read_sgp40_i2c():
-    # Implement your sgp40 sensor reading code here.
-    # For example, read the VOC data and return it in a dict.
+    # Instead of a dummy value, get the actual reading from the sensor.
     try:
-        # Dummy reading for example purposes
-        sgp40_value = 123  # Replace with actual sensor read
-        return {"voc": sgp40_value}
+        voc = read_sgp40_sw()   # Use the actual sensor read function
+        return {"voc": voc}
     except Exception as e:
         return {"error": str(e)}
 
