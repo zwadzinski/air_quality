@@ -4,7 +4,7 @@ from typing import Dict, Any
 import time
 import uvicorn
 import threading
-from sensors import read_pmsa003_i2c, read_sgp40_i2c
+from sensors import read_pmsa003_i2c, read_sgp40_sw
 
 app = FastAPI()
 
@@ -23,7 +23,7 @@ async def get_data():
         raise HTTPException(status_code=500, detail=pmsa_data["error"])
     
     # Read data from the sgp40 sensor.
-    sgp40_data = read_sgp40_i2c()
+    sgp40_data = read_sgp40_sw()
     if isinstance(sgp40_data, dict) and sgp40_data.get("error"):
         raise HTTPException(status_code=500, detail=sgp40_data["error"])
     
