@@ -35,6 +35,18 @@ def read_sgp40_sw():
     except Exception as e:
         return f"Error reading SGP40 on software I2C: {e}"
     
+
+# New function for sgp40 sensor data
+def read_sgp40_i2c():
+    # Implement your sgp40 sensor reading code here.
+    # For example, read the VOC data and return it in a dict.
+    try:
+        # Dummy reading for example purposes
+        sgp40_value = 123  # Replace with actual sensor read
+        return {"voc": sgp40_value}
+    except Exception as e:
+        return {"error": str(e)}
+
 if __name__ == "__main__":
     # Test reading from the SGP40 sensor
     sgp40_data = read_sgp40_sw()

@@ -4,7 +4,7 @@ from typing import Dict, Any
 import time
 import uvicorn
 import threading
-from sensors import read_pmsa003_i2c
+from sensors import read_pmsa003_i2c, read_sgp40_i2c
 
 app = FastAPI()
 
@@ -17,11 +17,18 @@ class SensorData(BaseModel):
 
 @app.get("/data")
 async def get_data():
-    sensor_data = read_pmsa003_i2c()
-    if isinstance(sensor_data, dict) and sensor_data.get("error"):
-        raise HTTPException(status_code=500, detail=sensor_data["error"])
-    # Optionally, you can perform additional checks here.
-    return sensor_data
+    # Read data from the pmsa003 sensor.
+    pmsa_data = read_pmsa003_i2c()
+    if isinstance(pmsa_data, dict) and pmsa_data.get("error"):
+        raise HTTPException(status_code=500, detail=pmsa_data["error"])
+    
+    # Read data from the sgp40 sensor.
+    sgp40_data = read_sgp40_i2c()
+    if isinstance(sgp40_data, dict) and sgp40_data.get("error"):
+        raise HTTPException(status_code=500, detail=sgp40_data["error"])
+    
+    # Combine both sensor datasets
+    return {"pmsa0031": pmsa_data, "sgp40": sgp40_data}
 
 if __name__ == "__main__":
     # Start the background sensor update thread.
