@@ -1,0 +1,4 @@
+# To use the fastapi server:
+# 1. Run the fastapi server in the rpi: uvicorn fastapi_server:app --host 0.0.0.0 --port 8000 --reload
+# 2. Run the ngrok command in the rpi: ngrok http 8000
+# 3. Run the streamlit app in the streamlit server: streamlit run streamlit_app.py --server.enableCORS false --server.enableXsrfProtection false

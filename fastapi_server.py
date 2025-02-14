@@ -4,9 +4,7 @@ from typing import Dict, Any
 import time
 import uvicorn
 import threading
-
-# Import the sensor function from your sensor module (or app.py if necessary)
-from app import read_pmsa003_i2c  
+from sensors import read_pmsa003_i2c
 
 app = FastAPI()
 
